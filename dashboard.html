@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fyber Dashboard</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* Specific styles for the dashboard info */
+        .dashboard-card {
+            background: rgba(10, 20, 13, 0.9);
+            border: 1px solid #1e3a25;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 0 30px rgba(46, 204, 113, 0.1);
+        }
+        .info-label {
+            color: #667766;
+            font-size: 14px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .info-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        .balance-value {
+            color: #2ecc71; /* Green text for money */
+            text-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="screen-container">
+        <h1 class="title">Личный кабинет</h1>
+
+        <div class="dashboard-card">
+            <div class="info-label">Ваш ID</div>
+            <div class="info-value" id="display-id">...</div>
+
+            <div class="info-label">Баланс</div>
+            <div class="info-value balance-value" id="display-balance">... USD</div>
+
+            <button class="login-btn" onclick="logout()">Выйти</button>
+        </div>
+    </div>
+
+    <script>
+        // --- DASHBOARD LOGIC ---
+        
+        // 1. Get the data stored by script.js
+        const savedID = localStorage.getItem("fyber_current_id");
+        const savedBalance = localStorage.getItem("fyber_current_balance");
+
+        // 2. Security Check: If no ID is saved, go back to login
+        if (!savedID) {
+            window.location.href = "index.html";
+        } else {
+            // 3. Display the Data
+            document.getElementById("display-id").textContent = savedID;
+            
+            // Format money (e.g. adds commas if needed, though simple logic is fine here)
+            document.getElementById("display-balance").textContent = savedBalance + " USD";
+        }
+
+        // 4. Logout Logic
+        function logout() {
+            localStorage.removeItem("fyber_current_id");
+            localStorage.removeItem("fyber_current_balance");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+:root {
+    /* Видалив стару змінну фону, тепер використовуємо градієнт */
+    --text-white: #ffffff;
+    --input-bg: #0a140d;
+    --accent-green: #2ecc71; /* Додав для ясності, використовується в тінях */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    user-select: none;
+}
+
+body {
+    /* --- НОВИЙ ФОН --- */
+    /* Радіальний градієнт: світліший темно-зелений центр, що згасає в чорний */
+    background: radial-gradient(ellipse at 50% 30%, #0f2418 0%, #020302 75%);
+    background-color: #020302; /* Запасний колір */
+    /* ----------------- */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--text-white);
+}
+
+.screen-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #e0f2e9;
+}
+
+.input-wrapper {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.id-display {
+    width: 100%;
+    height: 60px;
+    background-color: var(--input-bg);
+    border: 1px solid #1e3a25;
+    border-radius: 12px;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    outline: none;
+    /* Внутрішнє світіння */
+    box-shadow: inset 0 0 20px rgba(30, 100, 50, 0.5);
+    user-select: text; 
+}
+
+.sub-link {
+    color: #667766;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.login-btn {
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(180deg, #1b5e35 0%, #052912 100%);
+    border: 1px solid #2a7a45;
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 40px;
+    /* Зовнішнє світіння кнопки */
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
+    transition: filter 0.2s;
+}
+
+.login-btn:active {
+    filter: brightness(1.2);
+}
+
+.keypad-container {
+    width: 100%;
+    /* Трохи прозорий фон для контейнера клавіатури, щоб було видно градієнт */
+    background-color: rgba(2, 3, 2, 0.8); 
+    border: 1px solid #1a1a1a;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.key-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.key {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+    width: 33%;
+    height: 60px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.key:active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.key-placeholder {
+    width: 33%;
+}
+
+.backspace svg {
+    width: 28px;
+    height: 28px;
+    pointer-events: none;
+}
