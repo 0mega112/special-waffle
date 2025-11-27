@@ -1,80 +1,105 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fyber Dashboard</title>
-    <link rel="stylesheet" href="style.css"> 
-    <style>
-        /* Specific styles for the dashboard info */
-        .dashboard-card {
-            background: rgba(10, 20, 13, 0.9);
-            border: 1px solid #1e3a25;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 0 30px rgba(46, 204, 113, 0.1);
-        }
-        .info-label {
-            color: #667766;
-            font-size: 14px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .info-value {
-            font-size: 32px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 25px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        .balance-value {
-            color: #2ecc71; /* Green text for money */
-            text-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dashboard-page">
 
-    <div class="screen-container">
-        <h1 class="title">Личный кабинет</h1>
+    <div class="dashboard-container">
+        
+        <!-- Header -->
+        <header class="dash-header">
+            <p class="welcome-text">Ласкаво просимо<br>в особистий кабінет</p>
+            <div class="logo-container">
+                <!-- Імітація логотипу текстом/SVG -->
+                <svg width="200" height="50" viewBox="0 0 200 50">
+                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" 
+                          fill="none" stroke="#2ecc71" stroke-width="1.5" 
+                          font-family="Arial, sans-serif" font-weight="900" font-size="36" letter-spacing="4">
+                        FYBER
+                    </text>
+                </svg>
+            </div>
+        </header>
 
-        <div class="dashboard-card">
-            <div class="info-label">Ваш ID</div>
-            <div class="info-value" id="display-id">...</div>
-
-            <div class="info-label">Баланс</div>
-            <div class="info-value balance-value" id="display-balance">... USD</div>
-
-            <button class="login-btn" onclick="logout()">Выйти</button>
+        <!-- Balance Card -->
+        <div class="card balance-card">
+            <div class="card-header">
+                <span class="card-label">Загальний Баланс</span>
+                <a href="#" class="details-link">Детальніше ></a>
+            </div>
+            <div class="balance-display-box">
+                <span id="display-balance" class="balance-amount">$0.00</span>
+            </div>
         </div>
+
+        <!-- Profile Card -->
+        <div class="card profile-card">
+            <div class="profile-icon-box">
+                <!-- Simple User Icon -->
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+            </div>
+            <div class="profile-info">
+                <h2 class="username" id="display-username">USER</h2>
+                <p class="user-id">ID: <span id="display-id">...</span></p>
+                <button class="profile-btn" onclick="alert('Профіль')">Профіль</button>
+            </div>
+        </div>
+
     </div>
 
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Меню</span>
+        </a>
+        <a href="#" class="nav-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+        </a>
+        <a href="#" class="nav-item" onclick="logout()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"/></svg>
+        </a>
+    </nav>
+
     <script>
-        // --- DASHBOARD LOGIC ---
-        
-        // 1. Get the data stored by script.js
-        const savedID = localStorage.getItem("fyber_current_id");
-        const savedBalance = localStorage.getItem("fyber_current_balance");
+        // Логіка завантаження даних
+        document.addEventListener('DOMContentLoaded', async () => {
+            const savedID = localStorage.getItem("fyber_current_id");
 
-        // 2. Security Check: If no ID is saved, go back to login
-        if (!savedID) {
-            window.location.href = "index.html";
-        } else {
-            // 3. Display the Data
-            document.getElementById("display-id").textContent = savedID;
+            if (!savedID) {
+                window.location.href = "index.html"; // Якщо не залогінений -> на вихід
+                return;
+            }
+
+            document.getElementById('display-id').textContent = savedID;
             
-            // Format money (e.g. adds commas if needed, though simple logic is fine here)
-            document.getElementById("display-balance").textContent = savedBalance + " USD";
-        }
+            // Спроба завантажити свіжий баланс
+            try {
+                // Важливо: перевірте шлях до файлу (див. попередні відповіді про ../)
+                const response = await fetch('../json_handler/balances.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data[savedID]) {
+                        // Форматування балансу
+                        document.getElementById('display-balance').textContent = '$' + data[savedID];
+                    }
+                }
+            } catch (e) {
+                console.log("Offline mode or fetching error");
+                // Fallback: читаємо старий баланс з localStorage, якщо є
+                const cachedBal = localStorage.getItem("fyber_current_balance");
+                if(cachedBal) document.getElementById('display-balance').textContent = '$' + cachedBal;
+            }
+        });
 
-        // 4. Logout Logic
         function logout() {
-            localStorage.removeItem("fyber_current_id");
-            localStorage.removeItem("fyber_current_balance");
+            localStorage.clear();
             window.location.href = "index.html";
         }
     </script>

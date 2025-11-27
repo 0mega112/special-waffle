@@ -4,17 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const backspaceBtn = document.getElementById('backspace-btn');
     const loginBtn = document.getElementById('login-btn');
 
-    // --- SIMULATED GOOGLE SHEET DATABASE ---
-    // In a real app, this data would come from a server.
-    // For now, add the IDs you want to test with here.
-    const googleSheetData = [
-        { id: "1111", balance: "150.00" },
-        { id: "2222", balance: "5000.00" },
-        { id: "8888", balance: "120.50" },
-        { id: "admin", balance: "999999.00" }
-    ];
-
-    // Keypad & Backspace Logic (Kept same as before)
+    // --- KEYPAD LOGIC (Unchanged) ---
     keypad.addEventListener('click', (e) => {
         const key = e.target.closest('.key');
         if (!key || key.classList.contains('backspace')) return;
@@ -45,8 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
         input.focus();
     }
 
-    // --- LOGGING LOGIC (THE PARSER METHOD) ---
-    loginBtn.addEventListener('click', () => {
+    // --- NEW LOGGING LOGIC USING FETCH ---
+    loginBtn.addEventListener('click', async () => {
         const enteredID = inputField.value.trim();
 
         if (!enteredID) {
@@ -54,27 +44,45 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 1. PARSE: Search for the user in our "Sheet"
-        const foundUser = googleSheetData.find(user => user.id === enteredID);
+        // Show loading state
+        const originalText = loginBtn.textContent;
+        loginBtn.textContent = "Проверка...";
 
-        if (foundUser) {
-            // 2. SUCCESS: User found
-            // We save the ID and Balance to browser memory so the next page can read it
-            localStorage.setItem("fyber_current_id", foundUser.id);
-            localStorage.setItem("fyber_current_balance", foundUser.balance);
-
-            // Optional: Loading effect
-            loginBtn.textContent = "Вход...";
+        try {
+            // 1. Fetch the JSON file
+            // Note: This requires running on a local server (localhost), not just file://
+            const response = await fetch('../json_handler/balances.json');
             
-            setTimeout(() => {
-                // Redirect to the dashboard
-                window.location.href = "dashboard.html"; 
-            }, 500);
+            if (!response.ok) {
+                throw new Error("Could not connect to database");
+            }
 
-        } else {
-            // 3. FAIL: User not found (Logic: "if no such id then wrong id")
-            alert("❌ Неверный ID\nТакого пользователя нет в базе.");
-            inputField.value = ""; // Clear input
+            const balancesData = await response.json();
+
+            // 2. Check if ID exists in the JSON object keys
+            if (balancesData.hasOwnProperty(enteredID)) {
+                
+                // SUCCESS: Get the balance associated with the ID
+                const userBalance = balancesData[enteredID];
+
+                // Save to localStorage
+                localStorage.setItem("fyber_current_id", enteredID);
+                localStorage.setItem("fyber_current_balance", userBalance);
+
+                // Redirect
+                window.location.href = "dashboard.html"; 
+
+            } else {
+                // FAIL: ID not found in JSON
+                alert("❌ Неверный ID\nТакого пользователя нет в базе.");
+                inputField.value = ""; 
+                loginBtn.textContent = originalText;
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert("Ошибка соединения с базой данных (check console)");
+            loginBtn.textContent = originalText;
         }
     });
 });
