@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // specific check to see if we are inside Telegram
     if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
         telegramUserId = tg.initDataUnsafe.user.id;
-        console.log("Telegram ID captured:", telegramUserId);
+        alert("Telegram ID: " + telegramUserId);
     } else {
-        console.log("No Telegram user data found (are you testing in a regular browser?)");
+        alert("No Telegram user data found (are you testing in a regular browser?)");
     }
 
     // --- 2. EXISTING UI LOGIC ---
