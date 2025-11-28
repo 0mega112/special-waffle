@@ -1,10 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- 1. INITIALIZE TELEGRAM & GET ID ---
+    const tg = window.Telegram.WebApp;
+    tg.expand(); // Expands the app to full height
+
+    // This is the variable that holds the Telegram ID
+    let telegramUserId = null;
+
+    // specific check to see if we are inside Telegram
+    if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+        telegramUserId = tg.initDataUnsafe.user.id;
+        console.log("Telegram ID captured:", telegramUserId);
+    } else {
+        console.log("No Telegram user data found (are you testing in a regular browser?)");
+    }
+
+    // --- 2. EXISTING UI LOGIC ---
     const inputField = document.getElementById('fyber-input');
     const keypad = document.getElementById('keypad');
     const backspaceBtn = document.getElementById('backspace-btn');
     const loginBtn = document.getElementById('login-btn');
 
-    // --- KEYPAD LOGIC (Unchanged) ---
+    // Keypad Logic
     keypad.addEventListener('click', (e) => {
         const key = e.target.closest('.key');
         if (!key || key.classList.contains('backspace')) return;
@@ -35,22 +51,21 @@ document.addEventListener('DOMContentLoaded', () => {
         input.focus();
     }
 
-    // --- NEW LOGGING LOGIC USING FETCH ---
+    // --- 3. LOGIN LOGIC ---
     loginBtn.addEventListener('click', async () => {
         const enteredID = inputField.value.trim();
 
         if (!enteredID) {
-            alert("Пожалуйста, введите ID");
+            alert("Please enter ID");
             return;
         }
 
         // Show loading state
         const originalText = loginBtn.textContent;
-        loginBtn.textContent = "Проверка...";
+        loginBtn.textContent = "Checking...";
 
         try {
-            // 1. Fetch the JSON file
-            // Note: This requires running on a local server (localhost), not just file://
+            // Fetch the JSON file
             const response = await fetch('../json_handler/balances.json');
             
             if (!response.ok) {
@@ -59,29 +74,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const balancesData = await response.json();
 
-            // 2. Check if ID exists in the JSON object keys
             if (balancesData.hasOwnProperty(enteredID)) {
                 
-                // SUCCESS: Get the balance associated with the ID
+                // SUCCESS
                 const userBalance = balancesData[enteredID];
+
+                // You can now use 'telegramUserId' here if you need to send it somewhere
+                console.log(`User ${enteredID} logged in. Telegram ID: ${telegramUserId}`);
 
                 // Save to localStorage
                 localStorage.setItem("fyber_current_id", enteredID);
                 localStorage.setItem("fyber_current_balance", userBalance);
+                
+                // If you want to save the Telegram ID for later pages:
+                if (telegramUserId) {
+                    localStorage.setItem("fyber_telegram_id", telegramUserId);
+                }
 
                 // Redirect
                 window.location.href = "dashboard.html"; 
 
             } else {
-                // FAIL: ID not found in JSON
-                alert("❌ Неверный ID\nТакого пользователя нет в базе.");
+                // FAIL
+                alert("❌ Invalid ID\nUser not found.");
                 inputField.value = ""; 
                 loginBtn.textContent = originalText;
             }
 
         } catch (error) {
             console.error(error);
-            alert("Ошибка соединения с базой данных (check console)");
+            alert("Connection error (check console)");
             loginBtn.textContent = originalText;
         }
     });
