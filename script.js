@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             // 1. Fetch the JSON file
             // Note: This requires running on a local server (localhost), not just file://
-            const response = await fetch('balances.json');
+            const response = await fetch('../json_handler/balances.json');
             
             if (!response.ok) {
                 throw new Error("Could not connect to database");

@@ -25,6 +25,11 @@ body {
     align-items: center;
     min-height: 100vh;
     color: var(--text-white);
+    
+    /* DISABLE ZOOMING */
+    touch-action: manipulation;
+    -webkit-text-size-adjust: 100%;
+    overscroll-behavior: none; /* Prevents "bounce" effect when scrolling to top/bottom */
 }
 
 .screen-container {
