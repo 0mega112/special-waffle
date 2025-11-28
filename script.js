@@ -1,20 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. INITIALIZE TELEGRAM & GET ID ---
-    // const tg = window.Telegram.WebApp;
-    // tg.expand(); // Expands the app to full height
-
-    // // This is the variable that holds the Telegram ID
-    // let telegramUserId = null;
-
-    // // specific check to see if we are inside Telegram
-    // if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-    //     telegramUserId = tg.initDataUnsafe.user.id;
-    //     alert("Telegram ID: " + telegramUserId);
-    // } else {
-    //     alert("No Telegram user data found (are you testing in a regular browser?)");
-    // }
-
-    // --- 2. EXISTING UI LOGIC ---
+    
+    // --- 1. UI LOGIC ---
     const inputField = document.getElementById('fyber-input');
     const keypad = document.getElementById('keypad');
     const backspaceBtn = document.getElementById('backspace-btn');
@@ -51,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         input.focus();
     }
 
-    // --- 3. LOGIN LOGIC ---
+    // --- 2. LOGIN LOGIC ---
     loginBtn.addEventListener('click', async () => {
         const enteredID = inputField.value.trim();
 
@@ -66,7 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Fetch the JSON file
-            const response = await fetch('balances.json');
+            // ПРИМІТКА: Якщо ви на GitHub Pages, тут краще вказати повне посилання:
+            // https://ваш-нік.github.io/репо/json_handler/balances.json
+            const response = await fetch('../json_handler/balances.json');
             
             if (!response.ok) {
                 throw new Error("Could not connect to database");
@@ -79,17 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // SUCCESS
                 const userBalance = balancesData[enteredID];
 
-                // You can now use 'telegramUserId' here if you need to send it somewhere
-                console.log(`User ${enteredID} logged in. Telegram ID: ${telegramUserId}`);
+                console.log(`User ${enteredID} logged in.`);
 
                 // Save to localStorage
                 localStorage.setItem("fyber_current_id", enteredID);
                 localStorage.setItem("fyber_current_balance", userBalance);
-                
-                // If you want to save the Telegram ID for later pages:
-                if (telegramUserId) {
-                    localStorage.setItem("fyber_telegram_id", telegramUserId);
-                }
 
                 // Redirect
                 window.location.href = "dashboard.html"; 
