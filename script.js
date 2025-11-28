@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. INITIALIZE TELEGRAM & GET ID ---
-    const tg = window.Telegram.WebApp;
-    tg.expand(); // Expands the app to full height
+    // const tg = window.Telegram.WebApp;
+    // tg.expand(); // Expands the app to full height
 
-    // This is the variable that holds the Telegram ID
-    let telegramUserId = null;
+    // // This is the variable that holds the Telegram ID
+    // let telegramUserId = null;
 
-    // specific check to see if we are inside Telegram
-    if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-        telegramUserId = tg.initDataUnsafe.user.id;
-        alert("Telegram ID: " + telegramUserId);
-    } else {
-        alert("No Telegram user data found (are you testing in a regular browser?)");
-    }
+    // // specific check to see if we are inside Telegram
+    // if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+    //     telegramUserId = tg.initDataUnsafe.user.id;
+    //     alert("Telegram ID: " + telegramUserId);
+    // } else {
+    //     alert("No Telegram user data found (are you testing in a regular browser?)");
+    // }
 
     // --- 2. EXISTING UI LOGIC ---
     const inputField = document.getElementById('fyber-input');
