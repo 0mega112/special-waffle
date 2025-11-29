@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Fetch the JSON file
             // ПРИМІТКА: Якщо ви на GitHub Pages, тут краще вказати повне посилання:
             // https://ваш-нік.github.io/репо/json_handler/balances.json
-            const response = await fetch('balances.json');
+            const response = await fetch('../json_handler/balances.json');
             
             if (!response.ok) {
                 throw new Error("Could not connect to database");
@@ -65,8 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (balancesData.hasOwnProperty(enteredID)) {
                 
                 // SUCCESS
-                const userBalance = balancesData[enteredID];
-
+                const userData = balancesData[enteredID]; // This is now an object
+                const userBalance = userData.balance;     // Get balance
+                const userName = userData.username;       // Get username
                 console.log(`User ${enteredID} logged in.`);
 
                 // Save to localStorage

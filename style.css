@@ -1,8 +1,12 @@
 :root {
-    /* Видалив стару змінну фону, тепер використовуємо градієнт */
+    --bg-color: #050805;
     --text-white: #ffffff;
+    --accent-green: #2ecc71;
     --input-bg: #0a140d;
-    --accent-green: #2ecc71; /* Додав для ясності, використовується в тінях */
+    --border-green: #1a3a2a;
+    --glow-green: rgba(46, 204, 113, 0.4);
+    --btn-gradient-start: #1b5e35;
+    --btn-gradient-end: #0f2e1b;
 }
 
 * {
@@ -11,25 +15,22 @@
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    /* --- НОВИЙ ФОН --- */
-    /* Радіальний градієнт: світліший темно-зелений центр, що згасає в чорний */
-    background: radial-gradient(ellipse at 50% 30%, #0f2418 0%, #020302 75%);
-    background-color: #020302; /* Запасний колір */
-    /* ----------------- */
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: #020302;
+    background: radial-gradient(circle at 50% 0%, #0d2616 0%, #020302 60%);
     min-height: 100vh;
+    display: flex;
+    justify-content: center; /* Center content vertically for login */
+    align-items: center;     /* Center content horizontally */
     color: var(--text-white);
     
-    /* DISABLE ZOOMING */
+    /* Disable Zoom */
     touch-action: manipulation;
     -webkit-text-size-adjust: 100%;
-    overscroll-behavior: none; /* Prevents "bounce" effect when scrolling to top/bottom */
+    overscroll-behavior: none;
 }
 
 .screen-container {
@@ -64,7 +65,6 @@ body {
     font-size: 24px;
     text-align: center;
     outline: none;
-    /* Внутрішнє світіння */
     box-shadow: inset 0 0 20px rgba(30, 100, 50, 0.5);
     user-select: text; 
 }
@@ -87,7 +87,6 @@ body {
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 40px;
-    /* Зовнішнє світіння кнопки */
     box-shadow: 0 0 15px rgba(46, 204, 113, 0.2);
     transition: filter 0.2s;
 }
@@ -96,10 +95,10 @@ body {
     filter: brightness(1.2);
 }
 
+/* Keypad Styles */
 .keypad-container {
     width: 100%;
-    /* Трохи прозорий фон для контейнера клавіатури, щоб було видно градієнт */
-    background-color: rgba(2, 3, 2, 0.8); 
+    background-color: rgba(2, 3, 2, 0.8);
     border: 1px solid #1a1a1a;
     border-radius: 20px;
     padding: 20px;
@@ -141,212 +140,4 @@ body {
     width: 28px;
     height: 28px;
     pointer-events: none;
-}
-
-/* --- Загальні стилі (якщо їх ще немає) --- */
-:root {
-    --bg-dark: #020302;
-    --card-bg: rgba(16, 24, 18, 0.6);
-    --border-green: #153320;
-    --accent-green: #2ecc71;
-    --glow-green: rgba(46, 204, 113, 0.4);
-    --text-grey: #8a9ba8;
-}
-
-body.dashboard-page {
-    background: radial-gradient(circle at top center, #0a1f12 0%, #020302 60%);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 80px; /* Місце для нижнього меню */
-}
-
-.dashboard-container {
-    padding: 20px;
-    width: 100%;
-    max-width: 450px;
-    margin: 0 auto;
-}
-
-/* --- Header --- */
-.dash-header {
-    margin-top: 40px;
-    margin-bottom: 30px;
-    text-align: left;
-}
-
-.welcome-text {
-    color: #e0f2e9;
-    font-size: 20px;
-    line-height: 1.4;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-.logo-container svg {
-    display: block;
-    margin-left: -10px; /* Вирівнювання SVG */
-}
-
-/* --- Cards --- */
-.card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-green);
-    border-radius: 24px;
-    padding: 20px;
-    margin-bottom: 20px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-/* --- Balance Card Specifics --- */
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.card-label {
-    color: #b0c4b8;
-    font-size: 14px;
-}
-
-.details-link {
-    color: #5d6d63;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.balance-display-box {
-    width: 100%;
-    height: 80px;
-    /* Градієнт кнопки як на фото */
-    background: linear-gradient(180deg, rgba(46,204,113,0.15) 0%, rgba(46,204,113,0.05) 100%);
-    border: 1px solid #2e7a45;
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: inset 0 0 20px rgba(46,204,113,0.2), 0 0 15px rgba(0,0,0,0.5);
-}
-
-.balance-amount {
-    font-size: 32px;
-    font-weight: 800;
-    color: #2ecc71;
-    text-shadow: 0 0 10px rgba(46,204,113,0.4);
-    letter-spacing: 1px;
-}
-
-/* --- Profile Card Specifics --- */
-.profile-card {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Ефект скошеного фону (картинка зліва) */
-.profile-icon-box {
-    width: 70px;
-    height: 70px;
-    background: #0f1c15;
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: rotate(-5deg); /* Легкий нахил як на дизайні */
-    border: 1px solid #2a3d31;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-}
-
-.profile-icon-box svg {
-    transform: rotate(5deg); /* Вирівнюємо іконку назад */
-    width: 40px;
-    height: 40px;
-}
-
-.profile-info {
-    flex-grow: 1;
-}
-
-.username {
-    font-size: 18px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 4px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.user-id {
-    font-size: 14px;
-    color: #55665f;
-    margin-bottom: 12px;
-}
-
-.profile-btn {
-    background: transparent;
-    border: 1px solid #2a3d31;
-    color: #b0c4b8;
-    padding: 8px 20px;
-    border-radius: 12px;
-    font-size: 14px;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-    background: #0b140f;
-}
-
-/* --- Bottom Navigation --- */
-.bottom-nav {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 400px;
-    background: rgba(10, 15, 12, 0.85);
-    backdrop-filter: blur(15px);
-    border-radius: 30px;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    border: 1px solid #1a1a1a;
-    z-index: 100;
-}
-
-.nav-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: #4a5a50;
-    text-decoration: none;
-    padding: 12px;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-}
-
-/* Активний елемент меню (світиться зеленим) */
-.nav-item.active {
-    background: linear-gradient(90deg, #1b5e35 0%, #0f3d24 100%);
-    color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-    box-shadow: 0 0 15px rgba(46,204,113,0.3);
-    border: 1px solid #2a7a45;
-}
-
-.nav-item.active span {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.nav-item span {
-    display: none; /* Ховаємо текст для неактивних */
 }
