@@ -64,6 +64,9 @@ body::before {
 .page-header {
     margin-top: 20px;
     margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .page-title {
@@ -71,6 +74,27 @@ body::before {
     font-weight: 500;
     color: #e0f2e9;
     padding-left: 5px;
+}
+
+.page-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.text-faded {
+    color: var(--text-grey);
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #e0f2e9;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* --- Cards Common --- */
@@ -139,6 +163,107 @@ body::before {
     display: flex;
     flex-direction: column;
 }
+
+/* --- WITHDRAW SECTION STYLES (New) --- */
+.withdraw-section {
+    padding-top: 10px;
+}
+
+.withdraw-card-inner {
+    background: #080f0b;
+    border: 1px solid #1a2e25;
+    border-radius: 30px;
+    padding: 25px;
+    text-align: center;
+}
+
+.withdraw-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.withdraw-desc {
+    color: #5d6e65;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.custom-input {
+    width: 100%;
+    background-color: #030504;
+    border: 1px solid #1a2e25;
+    border-radius: 12px;
+    padding: 18px;
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Unbounded', sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.custom-input:focus {
+    border-color: var(--accent-green);
+}
+
+.custom-input::placeholder {
+    color: #3b4d42;
+}
+
+.method-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.method-btn {
+    flex: 1;
+    padding: 15px 10px;
+    background-color: #050806;
+    border: 1px solid #1a2e25;
+    border-radius: 12px;
+    color: #5d6e65;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Unbounded', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.method-btn.active {
+    background-color: #0d1f14;
+    border-color: #1e5233;
+    color: #38FF7E;
+}
+
+.submit-request-btn {
+    width: 100%;
+    background: linear-gradient(180deg, #165c36 0%, #0d3821 100%);
+    border: none;
+    border-top: 1px solid #2e7a45;
+    border-radius: 16px;
+    padding: 20px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Unbounded', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.15);
+    transition: transform 0.1s, box-shadow 0.3s;
+}
+
+.submit-request-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 10px rgba(46, 204, 113, 0.1);
+}
+
 
 /* --- ANIMATION: Slide Up --- */
 @keyframes slideUp {
