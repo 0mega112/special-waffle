@@ -43,7 +43,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('images/lines.png');
+    background-image: url('lines.png');
     background-repeat: repeat; 
     background-size: 350px auto;     
     opacity: 0.3; 
