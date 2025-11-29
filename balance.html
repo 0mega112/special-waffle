@@ -80,7 +80,7 @@
 
             try {
                 // ПРЯМИЙ ЗАПИТ ДО JSON (як просили)
-                const response = await fetch('../json_handler/balances.json');
+                const response = await fetch('balances.json');
                 
                 if (response.ok) {
                     const data = await response.json();
