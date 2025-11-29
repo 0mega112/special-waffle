@@ -18,7 +18,7 @@
         <!-- Balance Section -->
         <div class="card main-balance-card">
             <div class="balance-glow-box">
-                <span class="balance-amount">$0.00</span>
+                <span class="balance-amount" id="balance-amount">$0.00</span>
             </div>
             
             <button class="withdraw-btn">Вывод средств</button>
@@ -47,19 +47,15 @@
 
     </div>
 
-    <!-- Bottom Navigation (MATCHING DASHBOARD STRUCTURE) -->
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
-        
-        <!-- Left: Home Link (Inactive) -->
         <a href="dashboard.html" class="nav-item">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
             </svg>
         </a>
         
-        <!-- Center: Balance (Active Pill) -->
         <a href="#" class="nav-item active">
-            <!-- Dollar Icon -->
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="12" y1="1" x2="12" y2="23"></line>
                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
@@ -67,20 +63,38 @@
             <span>Баланс</span>
         </a>
         
-        <!-- Right: Profile (Inactive) -->
         <a href="#" class="nav-item">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-            </svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
         </a>
-
     </nav>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedBal = localStorage.getItem("fyber_current_balance");
-            if(savedBal) {
-                document.querySelector('.balance-amount').textContent = '$' + savedBal;
+        document.addEventListener('DOMContentLoaded', async () => {
+            const savedID = localStorage.getItem("fyber_current_id");
+            
+            // Якщо ID немає, можливо користувач не залогінився, але спробуємо показати кеш або 0
+            if (!savedID) { 
+                console.log("No User ID found");
+                return;
+            }
+
+            try {
+                // ПРЯМИЙ ЗАПИТ ДО JSON (як просили)
+                const response = await fetch('../json_handler/balances.json');
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Знаходимо користувача в JSON
+                    const userData = data[savedID];
+                    
+                    if (userData) {
+                        // Оновлюємо тільки баланс
+                        document.getElementById('balance-amount').textContent = '$' + userData.balance;
+                    }
+                }
+            } catch (e) {
+                console.error("Error fetching balance:", e);
             }
         });
     </script>
